@@ -21,11 +21,11 @@ data = []
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, "html.parser")
 
-    # 2. Buscar productos
+    # Buscar productos
     productos = soup.find_all("div", class_="ui-search-result__content-wrapper")
 
     for p in productos:
-        # Nombre del producto
+        # Nombre producto
         nombre = p.find("h2", class_="ui-search-item__title")
         nombre = nombre.text.strip() if nombre else "No disponible"
 
@@ -33,11 +33,11 @@ if response.status_code == 200:
         precio = p.find("span", class_="andes-money-amount__fraction")
         precio = precio.text.strip() if precio else "No disponible"
 
-        # Enlace del producto
+        # Enlace
         enlace = p.find("a", class_="ui-search-link")
         enlace = enlace["href"] if enlace else "No disponible"
 
-        # Código del producto
+        # Cod
         cod_producto = None
         if enlace and "MCO" in enlace:
             cod_producto = [part for part in enlace.split("/") if "MCO" in part]
@@ -51,11 +51,11 @@ if response.status_code == 200:
             "codigo": cod_producto
         })
 
-    # 3. Guardar en CSV con pandas
+    # Guardar en CSV 
     df = pd.DataFrame(data)
-    df.to_csv("productos_mercadolibre.csv", index=False, encoding="utf-8-sig")
+    df.to_csv("productos_Almacenes_HJ.csv", index=False, encoding="utf-8-sig")
 
-    print("✅ Datos guardados en productos_mercadolibre.csv")
+    print("✅ Datos guardados en productos_Almacenes_HJ.csv")
 
 else:
     print("Error al acceder:", response.status_code)
