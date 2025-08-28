@@ -4,7 +4,6 @@ Qué podemos extraer con este enfoque
 - Precio
 - Código del producto (MCO...)
 - Link del producto
-- Nombre de la tienda (aparece en la parte superior, lo podemos buscar con otra regla en soup)
 """
 import requests
 from bs4 import BeautifulSoup
